@@ -30,7 +30,7 @@ This is why we're considering 1-based index.
 
 */
 
-void buildTree(int[] A, int[] tree, int start, int end, int TreeNode ){ //RECURSIVE METHOD FOR BUILDING TREE
+void buildTree( int[] tree,int[] A, int index, int start, int end ){ //RECURSIVE METHOD FOR BUILDING TREE
 
 //base case
 if(start>end)
@@ -38,19 +38,19 @@ return;
 
 //base case - leaf node
 if(start == end){
-tree[TreeNode] = A[start];
+tree[index] = A[start];
 return;
 }
 //build tree recursively
 
 int mid= (start +end)/2;
 //LEFT SUBTREE
-buildTree(A, tree, start, mid , 2*TreeNode);
+buildTree(tree, A, 2*index, start, mid);
 //RIGHT SUBTREE
-buildTree(A, tree, mid, end , 2*TreeNode+1);
-tree[TreeNode] = tree[2*TreeNode] + tree[2*TreeNode+1];          //for Sum query
-tree[TreeNode] = Math.max(tree[2*TreeNode],tree[2*TreeNode+1]);  //for max query
-tree[TreeNode] = Math.min(tree[2*TreeNode],tree[2*TreeNode+1]);  //for min query
+buildTree(tree, A, 2*index+1, mid, end);
+tree[index] = tree[2*Tindex] + tree[2*index+1];          //for Sum query
+tree[index] = Math.max(tree[2*index],tree[2*index+1]);  //for max query
+tree[index] = Math.min(tree[2*index],tree[2*index+1]);  //for min query
 
 }
 
