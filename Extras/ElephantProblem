@@ -1,0 +1,11 @@
+//Elephant in a MXN grid chess board. Number of ways it can reach the (M,N) points from (0,0)  .
+
+
+if(x==0 && y==0)
+return 1;
+
+if(out of grid condition)
+return 0;
+
+return f(x-k, y) + f(x, y-k)
+where k ranges from 1 to y-k / x-k

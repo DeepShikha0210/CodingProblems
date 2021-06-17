@@ -1,0 +1,27 @@
+An array has N elements.Find Maximum sum subarray without including adjacent elements.
+
+A=[2,10,8,3]
+
+output:= 13
+
+
+dp(1,N) = max(A[1,N])
+dp(1,N) = maximum of A1 + dp(3,N) OR  dp(2,N)    //After procesing A1
+  
+   0 1 2 3
+A=[5,6,8,4]
+
+int[] dp = new int[100000];
+int maxSum(ArrayList<Integer> A, int i)
+{
+
+   if(A.size() == 1)
+     return A.get(A.size()-1);
+	 
+	 if (dp[i] != -1)
+	 int option1 =A.get(i) +  maxSum(A, i+2);
+	 int option2 =maxSum(A, i+1);
+	 return dp[i] = Math.max(option1, option2);
+}	 
+	 
+	 

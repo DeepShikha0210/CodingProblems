@@ -1,0 +1,11 @@
+//
+/*N friends went to goa. Either you sit on scooty in pairs or you sit alone.  In how many ways can a person go solo
+or go in pair.*/
+
+
+//if nth friend goes alone, then  f(n-1) *1 here * indicates AND condition
+
+//if nth friend wants to go in pair f(n-2)*n-1
+//i.e. he goes with one of the n-1 people n-1(C)1 --> nCr and remaining n-2 decided for themselves
+
+ //f(n) = f(n-1) + (n-1)*f(n-2)
