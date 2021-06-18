@@ -1,30 +1,3 @@
-/*
-Min-max Query:
-1) Brute force(Linear search) - build O(Q), Q(#queries) O(NQ), Update-O(1)
-
-2) Prefix sum array - build O(N),  Q(#queries) O(1),   Update-O(N)
-
-3) 2D Array : update O(N^2)  queries O(1)
-
-3) Segment tree - build O(N), update(Ologn)
-
-
-Segment Tree:
->full binary tree
->based on divide and conquer
-
-     i(1-based)
-    / \
-  2i  (2i+1)
-
-     i(0-based)
-    / \
-(2i+1)(2i+2)
-
-Maximum size of array required = 4N+1
-Minimum size of array required = 2N-1
-
-*/
 package CreatingSolutions;
 
 class Solution{
@@ -32,10 +5,11 @@ class Solution{
     static int[]  tree;
 
     static void buildTree(int[] A, int tree[], int index, int start, int end){ //RECURSIVE METHOD FOR BUILDING TREE
-
+        System.out.println("1");
 //base case
         if(start>end)
             return;
+        System.out.println("2");
 //base case - leaf node
         if(start == end){
             tree[index] = A[start];
@@ -43,13 +17,15 @@ class Solution{
 //build tree recursively
         else {
             int mid = (start + end) / 2;
-      //LEFT SUBTREE
-            buildTree(A, tree, 2 * index, start, mid);
+            System.out.println("mid" + mid);
+//LEFT SUBTREE
+            buildTree(A, tree, 2 * index + 1, start, mid);
 //RIGHT SUBTREE
-            buildTree(A, tree, 2 * index+1, mid + 1, end);
+            buildTree(A, tree, 2 * index + 2, mid + 1, end);
             //tree[index] = tree[2*Tindex] + tree[2*index+1];          //for Sum query
             // tree[index] = Math.max(tree[2*index],tree[2*index+1]);  //for max query
-            tree[index] = Math.min(tree[2 * index ], tree[2 * index + 1]);  //for min query
+            System.out.println("came here too");
+            tree[index] = Math.min(tree[2 * index + 1], tree[2 * index + 2]);  //for min query
         }
     }
 
@@ -67,8 +43,8 @@ class Solution{
 //Case 3: Partial overlap -call both sides
 
         int mid = (start+end)/2;
-        int leftAns = query( 2*index, start, mid, queryStart, queryEnd);
-        int rightAns = query( 2*index+1, mid+1, end, queryStart, queryEnd);
+        int leftAns = query( 2*index+1, start, mid, queryStart, queryEnd);
+        int rightAns = query( 2*index+2, mid+1, end, queryStart, queryEnd);
         return Math.min(leftAns, rightAns);
 
     }
@@ -89,7 +65,7 @@ class Solution{
         int mid = (start+end)/2;
         update( 2*index, start, mid, i , value);
         update( 2*index+1, mid+1, end,  i , value);
-        tree[index] = Math.min(tree[2*index], tree[2*index+1]);
+        tree[index] = Math.min(tree[2*index+1], tree[2*index+2]);
         return;
     }
 
@@ -110,9 +86,9 @@ class Solution{
         }
 //Case 2: Partial overlap -call both sides
             int mid = (start + end) / 2;
-            rangeUpdate(2 * index, start, mid, rangeStart, rangeEnd, value);
-            rangeUpdate(2 * index + 1, mid + 1, end, rangeStart, rangeEnd, value);
-            tree[index] = Math.min(tree[2 * index], tree[2 * index + 1]);
+            rangeUpdate(2 * index+1, start, mid, rangeStart, rangeEnd, value);
+            rangeUpdate(2 * index + 2, mid + 1, end, rangeStart, rangeEnd, value);
+            tree[index] = Math.min(tree[2 * index+1], tree[2 * index + 2]);
             return;
 
         }
@@ -127,11 +103,10 @@ class Solution{
                   else{
                     int mid = (start+end)/2;
                     if(i <=mid && i >=end)
-                        pointUpdate(2*index, start, mid, i , value);
+                        pointUpdate(2*index+1, start, mid, i , value);
                     else
-                        pointUpdate( 2*index+1, mid+1, end,  i , value);
-                    tree[index] = Math.min(tree[2*index], tree[2*index+1]);
-					
+                        pointUpdate( 2*index+2, mid+1, end,  i , value);
+                    tree[index] = Math.min(tree[2*index+1], tree[2*index+2]);
                 }
                 return;
 
@@ -141,14 +116,12 @@ class Solution{
 
                 tree = new int[2*n-1];
 
-                buildTree(A, tree, 1, 0 , n-1);  //For 1-based taking index = 1
-			//	buildTree(A, tree, 0, 0 , n-1);  //For 0-based taking index = 0
-				
+                buildTree(A, tree, 0, 0 , n-1);
             }
 
             public static void main(String args[])
             {
-                int A[] = {1,2,3,4,5,6,7,8};
+                int A[] = {1, 2,3,4,5,6,7,8};
                 int n = A.length;
                 SegmentTree(n , A);
                 for(int i =0; i < tree.length; i++) {
@@ -167,3 +140,6 @@ class Solution{
 
 
         }
+
+
+
