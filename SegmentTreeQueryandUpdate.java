@@ -131,7 +131,7 @@ class Solution{
                     else
                         pointUpdate( 2*index+1, mid+1, end,  i , value);
                     tree[index] = Math.min(tree[2*index], tree[2*index+1]);
-					
+
                 }
                 return;
 
@@ -143,7 +143,7 @@ class Solution{
 
                 buildTree(A, tree, 1, 0 , n-1);  //For 1-based taking index = 1
 			//	buildTree(A, tree, 0, 0 , n-1);  //For 0-based taking index = 0
-				
+
             }
 
             public static void main(String args[])

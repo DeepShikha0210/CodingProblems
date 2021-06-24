@@ -73,15 +73,9 @@ static int knapSack(int W, int wt[], int val[], int N)
      
 // A utility function that returns 
 // maximum of two integers    
-static int max(int a, int b)    
-{    
-    return (a > b) ? a : b;    
-}
  
 // Returns the value of maximum profit  
-static int knapSackRec(int W, int wt[],
-                       int val[], int n,
-                       int [][]dp)     
+static int knapSackRec(int W, int wt[], int val[], int n, int [][]dp)     
 {  
      
     // Base condition
@@ -99,7 +93,7 @@ static int knapSackRec(int W, int wt[],
  
     else
         // Return value of table after storing 
-    return dp[n][W] = max((val[n - 1] +  knapSackRec(W - wt[n - 1], wt, val, n - 1, dp)), knapSackRec(W, wt, val, n - 1, dp)); 
+    return dp[n][W] = Math.max((val[n - 1] +  knapSackRec(W - wt[n - 1], wt, val, n - 1, dp)), knapSackRec(W, wt, val, n - 1, dp)); 
 }
 }										  
 /*int[][] dp = new int[n+1][W+1];  
@@ -114,3 +108,10 @@ As redundant calculations of states are avoided.
 Auxiliary Space: O(N*W). 
 The use of 2D array data structure for storing intermediate states-:
 */
+
+/*
+for(int i = 0; i < N + 1; i++) {
+            for (int j = 0; j < W + 1; j++)
+                System.out.print(dp[i][j] + " ");
+            System.out.println();
+        }*/
